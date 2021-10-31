@@ -40,7 +40,6 @@ function convertDateToString(date){
 
 }
 
-
 function getAllDateFormats(date){
     const dateStr = convertDateToString(date);
 
@@ -194,11 +193,6 @@ function getNearestPalindromeDate(date){
         return nextDateList;
     }
 }
-
-// console.log(getPreviousPalindromeDate(date));
-console.log(getNearestPalindromeDate(date));
-
-
 
 const dateInput = document.querySelector("#dateInput");
 const checkButton = document.querySelector("#checkButton");
