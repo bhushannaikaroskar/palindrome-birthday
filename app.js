@@ -136,6 +136,68 @@ function getNextPalindromeDate(date){
     return [counter,nextDate];
 }
 
+function getPreviousDate(date){
+    let day = date.day - 1;
+    let month = date.month;
+    let year = date.year;
+    
+    let daysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+    if(day === 0){
+        month--;
+        if(month === 2){
+            if(isLeapYear(date)){
+                day = 29
+            }else{
+                day = 28
+            }
+        }else if(month === 0){
+            month = 12;
+            day = daysInMonth[month-1]
+            year--;
+        }
+        else{
+            day = daysInMonth[month-1];
+        }
+    }
+
+    return {
+        day: day,
+        month: month,
+        year: year
+    }
+
+}
+
+function getPreviousPalindromeDate(date){
+    let prevDate = getPreviousDate(date);
+    let counter = 0;
+
+    while(true){
+        counter++;
+        if(checkPalindromeForAllFormat(prevDate)){
+            break;
+        }
+        prevDate = getPreviousDate(prevDate);
+    }
+
+    return [counter, prevDate];
+}
+
+function getNearestPalindromeDate(date){
+    const prevDateList = getPreviousPalindromeDate(date);
+    const nextDateList = getNextPalindromeDate(date);
+
+    if(prevDateList[0] < nextDateList[0]){
+        return prevDateList;
+    }else{
+        return nextDateList;
+    }
+}
+
+// console.log(getPreviousPalindromeDate(date));
+console.log(getNearestPalindromeDate(date));
+
 
 
 const dateInput = document.querySelector("#dateInput");
@@ -159,7 +221,7 @@ function clickHandler(){
         if(checkPalindromeForAllFormat(date)){
             output.innerText = "Yay your birthday is palindrome.";
         }else{
-            const [dayCount, nextPalindromeDate] = getNextPalindromeDate(date);
+            const [dayCount, nextPalindromeDate] = getNearestPalindromeDate(date);
             const nextDateString = nextPalindromeDate.day+"-"+nextPalindromeDate.month+"-"+nextPalindromeDate.year;
             output.innerHTML = `The nearest palindrome date is ${nextDateString.bold()}. You missed by ${dayCount.toString().bold()} ${dayCount === 1?"day":"days"}`;
         }
