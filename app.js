@@ -161,7 +161,7 @@ function clickHandler(){
         }else{
             const [dayCount, nextPalindromeDate] = getNextPalindromeDate(date);
             const nextDateString = nextPalindromeDate.day+"-"+nextPalindromeDate.month+"-"+nextPalindromeDate.year;
-            output.innerText = `The nearest palindrome date is ${nextDateString}. You missed by ${dayCount} ${dayCount === 1?"day":"days"}`;
+            output.innerHTML = `The nearest palindrome date is ${nextDateString.bold()}. You missed by ${dayCount.toString().bold()} ${dayCount === 1?"day":"days"}`;
         }
 
     }
