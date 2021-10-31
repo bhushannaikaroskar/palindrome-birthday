@@ -200,6 +200,8 @@ const output = document.querySelector("#output");
 
 function clickHandler(){
     const dateString = dateInput.value;
+    let resultString = "";
+    output.style.opacity = 0;
     if(dateString !== ""){
         const dateList = dateString.split("-");
         const year = dateList[0];
@@ -213,16 +215,21 @@ function clickHandler(){
         }
 
         if(checkPalindromeForAllFormat(date)){
-            output.innerText = "Yay your birthday is palindrome.";
+            resultString = "Yay your birthday is palindrome.";
         }else{
             const [dayCount, nextPalindromeDate] = getNearestPalindromeDate(date);
             const nextDateString = nextPalindromeDate.day+"-"+nextPalindromeDate.month+"-"+nextPalindromeDate.year;
-            output.innerHTML = `The nearest palindrome date is ${nextDateString.bold()}. You missed by ${dayCount.toString().bold()} ${dayCount === 1?"day":"days"}`;
+            resultString = `The nearest palindrome date is ${nextDateString.bold()}. You missed by ${dayCount.toString().bold()} ${dayCount === 1?"day":"days"}`;
         }
 
     }else if(dateString === ""){
-        output.innerText = "Please enter date value to check";
+        resultString = "Please enter date value to check";
     }
+
+    setTimeout(()=>{
+        output.style.opacity = 1;
+        output.innerHTML = resultString;
+    },500);
 }
 
 checkButton.addEventListener("click",clickHandler);

@@ -53,3 +53,7 @@ button{
     border: 0px;
     border-radius: 2px;
 }
+
+#output{
+    transition: all 0.3s ease-in-out;
+}
