@@ -220,6 +220,8 @@ function clickHandler(){
             output.innerHTML = `The nearest palindrome date is ${nextDateString.bold()}. You missed by ${dayCount.toString().bold()} ${dayCount === 1?"day":"days"}`;
         }
 
+    }else if(dateString === ""){
+        output.innerText = "Please enter date value to check";
     }
 }
 
